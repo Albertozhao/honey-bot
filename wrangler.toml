@@ -1,0 +1,7 @@
+name = "honey-bot"
+type = "webpack"
+account_id = "c2e2b711a427d3b930925ad760d4f488"
+workers_dev = true
+route = ""
+zone_id = ""
+webpack_config = "webpack.config.js"
