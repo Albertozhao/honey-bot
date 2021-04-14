@@ -8,6 +8,8 @@ import {
   EmbedType,
   ApplicationCommandOptionType,
 } from '@glenstack/cf-workers-discord-bot'
+//@ts-ignore
+import { hc } from "./logging"
 
 const cuteAnimal: ApplicationCommand = {
   name: 'cute-animal-pic',
@@ -30,6 +32,10 @@ const cuteAnimal: ApplicationCommand = {
         {
           name: 'Wombat',
           value: 'Wombat',
+        },
+        {
+          name: 'Octopus',
+          value: 'Octopus',
         },
       ],
     },
@@ -110,6 +116,19 @@ const animalPics = [
       'https://cdn.pixabay.com/photo/2017/06/02/06/16/wombats-2365429_960_720.jpg',
     baby: false,
   },
+  {
+    name: 'Octopus',
+    value:
+      'https://allthatsinteresting.com/wordpress/wp-content/uploads/2019/02/blue-ringed-octopus-spreading-out.jpg',
+    baby: true,
+  },
+  {
+    name: 'Octopus',
+    value:
+      'https://cdn.pixabay.com/photo/2016/04/01/08/33/animal-1298790_1280.png',
+    baby: false,
+  }
+
 ]
 
 function getUrl(optionType: string, optionBaby: boolean) {
@@ -125,6 +144,12 @@ const slashCommandHandler = createSlashCommandHandler({
   commands: [[cuteAnimal, cuteHandler]],
 });
 
-addEventListener("fetch", (event) => {
-  event.respondWith(slashCommandHandler(event.request));
-});
+const config = {
+  dataset: 'my-first-dataset',
+  apiKey: '123456789',
+}
+const listener = hc(config, event => {
+  return event.respondWith(slashCommandHandler(event.request))
+})
+
+addEventListener('fetch', listener)
