@@ -138,9 +138,9 @@ function getUrl(optionType: string, optionBaby: boolean) {
 }
 
 const slashCommandHandler = createSlashCommandHandler({
-  applicationID: "816875132302655509",
+  applicationID: "123456789",
   applicationSecret: APPLICATION_SECRET, // You should store this in a secret
-  publicKey: "cd829205745051e4c906b6b108ce0956954ae8e09dc45ad63a38c034ac5a418f",
+  publicKey: "123456789",
   commands: [[cuteAnimal, cuteHandler]],
 });
 
